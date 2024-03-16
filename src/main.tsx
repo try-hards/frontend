@@ -1,3 +1,4 @@
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
