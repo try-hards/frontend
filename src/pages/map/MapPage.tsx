@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import tt from '@tomtom-international/web-sdk-maps';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import BottomDrawer from './BottomDrawer';
 
 const fetchEvents = async () => {
   const { data } = await axios.get<EventDto[]>('/api/events/get_events');
@@ -83,14 +84,15 @@ export default function MapPage() {
       <Box
         sx={{
           width: '100%',
-          height: '70vh',
-          p: 2,
+          height: '100vh',
         }}
       >
-        <Box id='map' sx={{ width: '100%', height: '100%', bgcolor: 'black' }}>
-          {/* MAP */}
-        </Box>
+        <Box
+          id='map'
+          sx={{ width: '100%', height: '100%', bgcolor: 'black' }}
+        />
       </Box>
+      <BottomDrawer />
     </Box>
   );
 }
