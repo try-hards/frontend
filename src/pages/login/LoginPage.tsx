@@ -28,7 +28,6 @@ export default function LoginPage({switchPage}: {switchPage: () => void}){
         // Jeśli autoryzxacja zakończyła się sukcesem, wywołaj funkcję przekazaną przez prop onLogin
         onLogin();
       } else {
-        // W przypadku błędu autoryzacji, ustaw komunikat o błędzie
         setError('Błąd logowania');
       }
     } catch (error) {

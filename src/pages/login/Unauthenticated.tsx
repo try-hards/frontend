@@ -1,4 +1,3 @@
-import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
