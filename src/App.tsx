@@ -9,6 +9,7 @@ import { queryClient } from './config/query';
 import { theme } from './config/theme';
 import AboutPage from './pages/about/AboutPage';
 import HomePage from './pages/home/HomePage';
+import MapPage from './pages/map/MapPage';
 import NotFoundPage from './pages/notFound/NotFoundPage';
 import EventListPage from './pages/eventList/EventListPage';
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/events',
         element: <EventListPage />,
+      },
+      {
+        path: '/map',
+        element: <MapPage />,
       },
       {
         path: '*',

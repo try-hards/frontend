@@ -1,4 +1,4 @@
-import React from 'react';
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
@@ -18,9 +18,10 @@ async function enableMocking() {
 
 enableMocking().then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    // <React.StrictMode>
+    //   <App />
+    // </React.StrictMode>,
+    <App />,
   );
 });
 
