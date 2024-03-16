@@ -19,6 +19,13 @@ export default function MapPage() {
       const loc = await getCurrentLocation();
       map.setCenter([loc.longitude, loc.latitude]);
       map.setZoom(14);
+
+      new tt.Marker()
+        .setLngLat({
+          lng: loc.longitude,
+          lat: loc.latitude,
+        })
+        .addTo(map);
     };
     fetchLocation();
 
