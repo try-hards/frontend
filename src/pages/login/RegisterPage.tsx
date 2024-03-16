@@ -7,7 +7,7 @@ interface RegisterProps {
   onRegister: (username: string, email: string, password: string) => void;
 }
 
-export default function RegisterPage() {
+export default function RegisterPage({switchPage}: {switchPage: () => void}) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -99,7 +99,7 @@ export default function RegisterPage() {
       <Box sx={{ mt: 2, textAlign: 'center' }}>
         <Typography variant="body2">
           Already have an account?{' '}
-          <Link href="/login" color="primary">
+          <Link onClick={switchPage} color="primary">
             Sign In
           </Link>
           .
@@ -111,7 +111,7 @@ export default function RegisterPage() {
           <Typography>Your account has been successfully registered.</Typography>
         </DialogContent>
         <DialogActions>
-          <Link href="/login">
+          <Link onClick={switchPage}>
             <Button color="primary">
               Back to Login
             </Button>

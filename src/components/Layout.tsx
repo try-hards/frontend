@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Navbar from './Navbar';
-import LoginPage from '@/pages/login/LoginPage';
+import Unauthenticated from '@/pages/login/Unauthenticated';
 import { useUserStore } from '@/stores/useUserStore';
 
 export default function Layout({ children }: React.PropsWithChildren) {
@@ -16,7 +16,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
           width: '100%',
         }}
       >
-        {isLoggedIn ? children : <LoginPage />}
+        {isLoggedIn ? children : <Unauthenticated/>}
       </Box>
       {isLoggedIn && <Navbar />}
     </Box>

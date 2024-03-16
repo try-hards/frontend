@@ -7,7 +7,7 @@ interface LoginProps {
   onLogin: (username: string, password: string) => void;
 }
 
-export default function LoginPage(){
+export default function LoginPage({switchPage}: {switchPage: () => void}){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -74,7 +74,7 @@ export default function LoginPage(){
       <Box sx={{ mt: 2, textAlign: 'center' }}>
         <Typography variant="body2">
           Dont have an account?{' '}
-          <Link href="/login" color="primary">
+          <Link onClick={switchPage}  color="primary">
             Register
           </Link>
           .
