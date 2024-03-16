@@ -18,6 +18,36 @@ import axios from "axios";
 import { dark } from "@mui/material/styles/createPalette";
 //import { formatDistanceToNow } from 'date-fns';
 import { format } from "date-fns";
+import Countdown from "react-countdown";
+
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
 
 const fetchEvents = async () => {
   const { data } = await axios.get<EventDto[]>("/api/events/get_events");
@@ -83,7 +113,8 @@ const EventListPage: React.FC = () => {
                       paddingRight: 2,
                       borderBottomLeftRadius: "9px",
                       borderBottomRightRadius: "9px",
-                      border: "2px solid grey",
+                      //border: "2px solid grey",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     }}
                   >
                     <Box
@@ -100,24 +131,47 @@ const EventListPage: React.FC = () => {
                         <Typography variant="h4">{event.name}</Typography>
                         <Stack direction="row" spacing={2} alignItems="center">
                           <Avatar
-                            alt="Remy Sharp"
-                            src="/static/images/avatar/1.jpg"
-                            sx={{ width: 24, height: 24 }}
+                            {...stringAvatar("Kent Dodds")}
+                            sx={{
+                              width: 24,
+                              height: 24,
+                              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)",
+                            }}
                           />
-                          <Typography variant="body2">User Name</Typography>
+                          <Typography variant="body2">
+                            {event.creator}
+                          </Typography>
                         </Stack>
                       </Box>
                       <Box sx={{ width: "50%", textAlign: "right" }}>
                         <Typography variant="body2">{event.place}</Typography>
-                        <Typography variant="body2">
-                          {new Date(
-                            parseInt(event.start_time)
-                          ).toLocaleTimeString()}{" "}
-                          -{" "}
-                          {new Date(
-                            parseInt(event.end_time)
-                          ).toLocaleTimeString()}
-                        </Typography>
+                        <Countdown
+                          date={new Date(parseInt(event.start_time))}
+                          renderer={({
+                            days,
+                            hours,
+                            minutes,
+                            seconds,
+                            completed,
+                          }) => {
+                            if (completed) {
+                              // Render a completed state
+                              return (
+                                <Typography variant="body2">
+                                  Event has ended
+                                </Typography>
+                              );
+                            } else {
+                              // Render a countdown
+                              return (
+                                <Typography variant="body2">
+                                  {days}d {hours}h {minutes}m {seconds}s until
+                                  event starts
+                                </Typography>
+                              );
+                            }
+                          }}
+                        />
                         <Typography variant="body2">
                           {event.participantsCount} / {event.participantsMax}{" "}
                           people
