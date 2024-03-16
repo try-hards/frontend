@@ -1,41 +1,28 @@
-import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { AccountBox, Home, Login } from '@mui/icons-material';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
-        <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Frontend-Base
-          </Typography>
-          <Box>
-            <Button href='/' color='inherit'>
-              Home
-            </Button>
-            <Button href='/map' color='inherit'>
-              Map
-            </Button>
-            <Button href='/about' color='inherit'>
-              About
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+    <Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
+      <BottomNavigation>
+        <BottomNavigationAction label='Home' icon={<Home />} href='/' />
+        <BottomNavigationAction
+          label='Sign In'
+          icon={<Login />}
+          href='/login'
+        />
+        <BottomNavigationAction
+          label='Events'
+          icon={<LocationOnOutlinedIcon />}
+          href='/profile'
+        />
+        <BottomNavigationAction
+          label='Profile'
+          icon={<AccountBox />}
+          href='/profile'
+        />
+      </BottomNavigation>
     </Box>
   );
 }

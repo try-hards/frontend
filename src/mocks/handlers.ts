@@ -8,12 +8,13 @@ const photoUrl =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Ludovic_and_Lauren_%288425515069%29.jpg/640px-Ludovic_and_Lauren_%288425515069%29.jpg';
 
 export const handlers = [
-  http.get(`${baseUrl}/cats`, () => {
+  http.get(`${baseUrl}/accounts/authenticated`, () => {
     return HttpResponse.json({
       data: [
-        { id: 1, name: 'Luna' },
-        { id: 2, name: 'Simba' },
-        { id: 3, name: 'Pixel' },
+        {
+          isAuthenticated: 'success',
+          user: 'Konrad',
+        },
       ],
     });
   }),
@@ -24,6 +25,7 @@ export const handlers = [
         description: 'Description 1',
         start_time: Date.now().toString(),
         end_time: addHours(Date.now(), 2).toString(),
+        creator: 'Konrad',
         place: 'Place 1',
         photo: photoUrl,
         participantsCount: 10,
@@ -36,6 +38,7 @@ export const handlers = [
         description: 'Description 2',
         start_time: Date.now().toString(),
         end_time: addHours(Date.now(), 2).toString(),
+        creator: 'Konrad',
         place: 'Place 1',
         photo: photoUrl,
         participantsCount: 10,
@@ -48,6 +51,7 @@ export const handlers = [
         description: 'Description 3',
         start_time: Date.now().toString(),
         end_time: addHours(Date.now(), 2).toString(),
+        creator: 'Konrad',
         place: 'Place 1',
         photo: photoUrl,
         participantsCount: 10,
@@ -56,5 +60,8 @@ export const handlers = [
         longitude: 19.95839,
       },
     ]);
+  }),
+  http.post(`${baseUrl}/accounts/register`, () => {
+    return HttpResponse.json({});
   }),
 ];
