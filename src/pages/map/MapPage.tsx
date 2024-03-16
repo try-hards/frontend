@@ -1,10 +1,28 @@
 import { getCurrentCoords, getLastKnownCoords } from '@/services/geolocation';
+import { EventDto } from '@/types/EventDto';
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import tt from '@tomtom-international/web-sdk-maps';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+
+const fetchEvents = async () => {
+  const { data } = await axios.get<{ events: EventDto[] }>('/events');
+  return data;
+};
 
 export default function MapPage() {
   const [map, setMap] = useState<tt.Map>();
+
+  const {
+    data: eventsData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['events'],
+    queryFn: fetchEvents,
+  });
 
   useEffect(() => {
     const coords = getLastKnownCoords();
@@ -16,30 +34,43 @@ export default function MapPage() {
     });
     setMap(map);
 
-    const fetchLocation = async () => {
-      const { lat, lng } = await getCurrentCoords();
-      map.setCenter([lng, lat]);
+    if (map) {
+      const fetchLocation = async () => {
+        const { lat, lng } = await getCurrentCoords();
+        map.setCenter([lng, lat]);
 
-      const marker = new tt.Marker()
-        .setLngLat({
-          lng,
-          lat,
+        const markerElement = document.createElement('div');
+        markerElement.innerHTML = '<div class="marker"/>';
+
+        const userMarker = new tt.Marker({
+          element: markerElement,
         })
-        .addTo(map);
+          .setLngLat({ lng, lat })
+          .addTo(map);
+      };
 
-      const popup = new tt.Popup({ offset: 30 })
-        .setHTML('You are here')
-        .addTo(map);
-
-      marker.setPopup(popup);
-    };
-    fetchLocation();
+      fetchLocation();
+    }
 
     return () => {
       map.remove();
       setMap(undefined);
     };
   }, []);
+
+  useEffect(() => {
+    if (map && eventsData) {
+      eventsData.events.forEach((e) => {
+        const marker = new tt.Marker()
+          .setLngLat([e.longitude, e.latitude])
+          .addTo(map);
+        const popup = new tt.Popup({ offset: 30, anchor: 'bottom' })
+          .setHTML(`<h3>${e.title}</h3><p>${e.description}</p>`)
+          .addTo(map);
+        marker.setPopup(popup);
+      });
+    }
+  }, [map, eventsData]);
 
   return (
     <Box>
