@@ -27,8 +27,8 @@ export default function Navbar() {
             <Button href='/' color='inherit'>
               Home
             </Button>
-            <Button href='/about' color='inherit'>
-              About
+            <Button href='/login' color='inherit'>
+              Sign In
             </Button>
           </Box>
         </Toolbar>

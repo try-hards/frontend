@@ -9,7 +9,9 @@ import { queryClient } from './config/query';
 import { theme } from './config/theme';
 import AboutPage from './pages/about/AboutPage';
 import HomePage from './pages/home/HomePage';
+import LoginPage from './pages/login/LoginScreen';
 import NotFoundPage from './pages/notFound/NotFoundPage';
+import RegisterPage from './pages/registration/RegistrationScreen';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <AboutPage />,
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/register',
+        element: <RegisterPage />
       },
       {
         path: '*',
