@@ -44,12 +44,13 @@ export default function MapPage() {
 
         const markerElement = document.createElement('div');
         markerElement.innerHTML = '<div class="marker"/>';
-
-        new tt.Marker({
+        const userMarker = new tt.Marker({
           element: markerElement,
         })
           .setLngLat({ lng, lat })
           .addTo(map);
+
+        userMarker.getElement().style.zIndex = 1000;
       };
 
       fetchLocation();
@@ -72,13 +73,22 @@ export default function MapPage() {
           (e.participantsCount / e.participantsMax) * 100,
         );
 
+        const color =
+          fillPercent > 80 ? 'red' : fillPercent > 50 ? 'orange' : 'green';
+
         const popup = new tt.Popup({
           offset: 30,
           anchor: 'bottom',
           closeOnClick: false,
         })
           .setHTML(
-            `<h3 style="margin: 0 0 8px 0">${e.name}</h3><img style="width: 80px; height: 80px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>`,
+            `<h4 style="margin: 0 0 8px 0">${e.name}</h4>
+            <img style="width: 80px; height: 80px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>
+            <div class="outer-bar">
+              <div class="inner-bar" style="width: ${fillPercent}%; background: ${color}">
+              </div>
+            </div>
+            `,
           )
           .addTo(map);
 
