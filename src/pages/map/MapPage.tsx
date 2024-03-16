@@ -64,8 +64,14 @@ export default function MapPage() {
         const marker = new tt.Marker()
           .setLngLat([e.longitude, e.latitude])
           .addTo(map);
-        const popup = new tt.Popup({ offset: 30, anchor: 'bottom' })
-          .setHTML(`<h3>${e.name}</h3><p>${e.description}</p>`)
+        const popup = new tt.Popup({
+          offset: 30,
+          anchor: 'bottom',
+          closeOnClick: false,
+        })
+          .setHTML(
+            `<h3 style="margin: 0 0 8px 0">${e.name}</h3><img style="width: 80px; height: 80px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>`,
+          )
           .addTo(map);
         marker.setPopup(popup);
       });
