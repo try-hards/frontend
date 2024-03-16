@@ -3,6 +3,7 @@ export type EventDto = {
   description: string;
   start_time: string;
   end_time: string;
+  creator: string;
   place: string;
   photo: string;
   participantsCount: number;
