@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const fetchEvents = async () => {
-  const { data } = await axios.get<{ events: EventDto[] }>('/events');
+  const { data } = await axios.get<EventDto[]>('/api/events/get_events');
   return data;
 };
 
@@ -15,7 +15,7 @@ export default function MapPage() {
   const [map, setMap] = useState<tt.Map>();
 
   const {
-    data: eventsData,
+    data: events,
     isLoading,
     isError,
     error,
@@ -42,7 +42,7 @@ export default function MapPage() {
         const markerElement = document.createElement('div');
         markerElement.innerHTML = '<div class="marker"/>';
 
-        const userMarker = new tt.Marker({
+        new tt.Marker({
           element: markerElement,
         })
           .setLngLat({ lng, lat })
@@ -59,18 +59,18 @@ export default function MapPage() {
   }, []);
 
   useEffect(() => {
-    if (map && eventsData) {
-      eventsData.events.forEach((e) => {
+    if (map && events) {
+      events.forEach((e) => {
         const marker = new tt.Marker()
           .setLngLat([e.longitude, e.latitude])
           .addTo(map);
         const popup = new tt.Popup({ offset: 30, anchor: 'bottom' })
-          .setHTML(`<h3>${e.title}</h3><p>${e.description}</p>`)
+          .setHTML(`<h3>${e.name}</h3><p>${e.description}</p>`)
           .addTo(map);
         marker.setPopup(popup);
       });
     }
-  }, [map, eventsData]);
+  }, [map, events]);
 
   return (
     <Box>
