@@ -1,6 +1,7 @@
 import { EventDto } from '@/types/EventDto';
 
 import CloseIcon from '@mui/icons-material/Close';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,7 +19,6 @@ interface Props {
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiPaper-root': {
     width: '100%',
-    height: '50%',
   },
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -54,7 +54,17 @@ export default function EventDetailsModal({ event, unsetEvent }: Props) {
       >
         <CloseIcon />
       </IconButton>
-      <DialogContent dividers>
+      <DialogContent>
+        <Box
+          component={'img'}
+          src={event?.photo}
+          alt={event?.name}
+          sx={{
+            width: '100%',
+          }}
+        />
+      </DialogContent>
+      <DialogContent>
         <Typography gutterBottom>{event?.description}</Typography>
       </DialogContent>
       <DialogActions>
