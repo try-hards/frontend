@@ -55,63 +55,81 @@ const EventListPage: React.FC = () => {
       <nav aria-label="Events">
         <List>
           {events.map((event) => (
-            <ListItem disablePadding sx={{ mb: 1 }} key={event.name}>
-              <ListItemButton
-                sx={{
-                  height: "250px",
-                  width: "100vw",
-                  backgroundImage: `url('${event.photo}')`,
-                  position: "relative",
-                  borderRadius: "10px",
-                  padding: 0,
-                  border: "20px solid white",
-                }}
-              >
-                <Box
+            <React.Fragment key={event.name}>
+              <ListItem disablePadding sx={{ mb: 1 }}>
+                <ListItemButton
                   sx={{
-                    position: "absolute",
-                    height: "35%",
-                    width: "100%",
-                    bottom: 0,
-                    backgroundColor: "white",
-                    color: "black",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    borderTop: "20px solid white",
-                    paddingLeft: 2,
-                    paddingRight: 2,
-                    outline: "10px soild grey",
+                    height: "260px",
+                    width: "80vw",
+                    backgroundImage: `url('${event.photo}')`,
+                    position: "relative",
+                    borderRadius: "30px",
+                    padding: 0,
+                    border: "20px solid white",
                   }}
                 >
-                  <Box sx={{ alignItems: "flex-start" }}>
-                    <Typography variant="h5">{event.name}</Typography>
-                    <Stack direction="row" spacing={2} alignItems="center">
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
-                        sx={{ width: 24, height: 24 }}
-                      />
-                      <Typography variant="body2">User Name</Typography>
-                    </Stack>
-                  </Box>
                   <Box
-                    sx={{ position: "absolute", bottom: "5px", right: "2px" }}
+                    sx={{
+                      position: "absolute",
+                      height: "38%",
+                      width: "100%",
+                      bottom: 0,
+                      backgroundColor: "white",
+                      color: "black",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      paddingLeft: 2,
+                      paddingRight: 2,
+                      borderBottomLeftRadius: "9px",
+                      borderBottomRightRadius: "9px",
+                      border: "2px solid grey",
+                    }}
                   >
-                    <Typography variant="body2" align="right">
-                      {event.place}
-                    </Typography>
-                    <Typography variant="body2" align="right">
-                      date
-                    </Typography>
-                    <Typography variant="body2" align="right">
-                      {event.participantsCount} - {event.participantsMax} people
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      <Box sx={{ width: "50%" }}>
+                        <Typography variant="h4">{event.name}</Typography>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                          <Avatar
+                            alt="Remy Sharp"
+                            src="/static/images/avatar/1.jpg"
+                            sx={{ width: 24, height: 24 }}
+                          />
+                          <Typography variant="body2">User Name</Typography>
+                        </Stack>
+                      </Box>
+                      <Box sx={{ width: "50%", textAlign: "right" }}>
+                        <Typography variant="body2">{event.place}</Typography>
+                        <Typography variant="body2">
+                          {new Date(
+                            parseInt(event.start_time)
+                          ).toLocaleTimeString()}{" "}
+                          -{" "}
+                          {new Date(
+                            parseInt(event.end_time)
+                          ).toLocaleTimeString()}
+                        </Typography>
+                        <Typography variant="body2">
+                          {event.participantsCount} / {event.participantsMax}{" "}
+                          people
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Box>
-                </Box>
-              </ListItemButton>
+                </ListItemButton>
+                <Divider />
+              </ListItem>
               <Divider />
-            </ListItem>
+            </React.Fragment>
           ))}
         </List>
       </nav>
