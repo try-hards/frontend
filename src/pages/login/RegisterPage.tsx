@@ -18,11 +18,14 @@ export default function RegisterPage({switchPage}: {switchPage: () => void}) {
   const handleRegister = async () => {
     try {
       // Wywołujemy odpowiedni endpoint do rejestracji
-      const response = await fetch(API_URL + '/accounts/register', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
         method: 'POST',
+        credentials: "include",
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
-        },
+          'sessionid': document.cookie.split('; ').find(row => row.startsWith('X-CSRFToken='))?.split('=')[1] || '',
+      },  
         body: JSON.stringify({
           username,
           email,
