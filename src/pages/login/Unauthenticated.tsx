@@ -4,7 +4,7 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 
 export default function AboutPage() {
-  const [page, setPage] = useState<boolean>(false);
+  const [page, setPage] = useState<boolean>(true);
 
   const { login } = useUserStore();
 

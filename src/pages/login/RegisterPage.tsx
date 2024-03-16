@@ -23,10 +23,10 @@ export default function RegisterPage({
 }: {
   switchPage: () => void;
 }) {
-  const [username, setUsername] = useState('abcdef');
-  const [email, setEmail] = useState('user@mail.com');
-  const [password, setPassword] = useState('password123');
-  const [secondPassword, setSecondPassword] = useState('password123');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [secondPassword, setSecondPassword] = useState('');
   const [error, setError] = useState('');
   const [openModal, setOpenModal] = useState(false); // Stan dla otwierania/zamykania modala
 
