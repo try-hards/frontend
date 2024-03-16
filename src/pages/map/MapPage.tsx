@@ -50,7 +50,7 @@ export default function MapPage() {
           .setLngLat({ lng, lat })
           .addTo(map);
 
-        userMarker.getElement().style.zIndex = 1000;
+        userMarker.getElement().style.zIndex = '100';
       };
 
       fetchLocation();
