@@ -67,7 +67,7 @@ export default function RegisterPage({
     try {
       // Wywołujemy odpowiedni endpoint do rejestracji
       const response = await fetch(
-        'http://127.0.0.1:8000/api/accounts/register',
+        `${import.meta.env.VITE_API_BASE_URL}/api/accounts/register`,
         {
           method: 'POST',
           credentials: 'include',

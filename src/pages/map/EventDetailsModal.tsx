@@ -59,7 +59,7 @@ export default function EventDetailsModal({ event, unsetEvent }: Props) {
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleClose}>
-          Save changes
+          Join event
         </Button>
       </DialogActions>
     </BootstrapDialog>

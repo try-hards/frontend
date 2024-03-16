@@ -24,19 +24,22 @@ export default function LoginPage({
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-CSRFToken': localStorage.getItem('csrfToken') || '',
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/accounts/login`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': localStorage.getItem('csrfToken') || '',
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
+      );
 
       if (response.ok) {
         onLogin();
