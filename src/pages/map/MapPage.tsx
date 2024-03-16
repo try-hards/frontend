@@ -81,8 +81,8 @@ export default function MapPage() {
           closeOnClick: false,
         })
           .setHTML(
-            `<h4 style="margin: 0 0 8px 0">${e.name}</h4>
-            <img style="width: 80px; height: 80px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>
+            `<h4 style="margin: 0 0 8px 0; word-wrap: break-word; width: 100px;">${e.name}</h4>
+            <img style="width: 100px; height: 100px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>
             <div class="outer-bar">
               <div class="inner-bar" style="width: ${fillPercent}%; background: ${color}">
               </div>
