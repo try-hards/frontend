@@ -6,6 +6,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout';
 import { queryClient } from './config/query';
 import { theme } from './config/theme';
+import EventListPage from './pages/eventList/EventListPage';
 import MapPage from './pages/map/MapPage';
 import NotFoundPage from './pages/notFound/NotFoundPage';
 import ProfilePage from './pages/profile/ProfilePage';
@@ -28,8 +29,13 @@ const router = createBrowserRouter([
         element: <ProfilePage />,
       },
       {
+        path: '/events',
+        element: <EventListPage />,
+      },
+      {
         path: '*',
         element: <NotFoundPage />,
+      },
     ],
   },
 ]);
