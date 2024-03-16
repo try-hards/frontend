@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -41,7 +42,34 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/accounts/csrf_cookie', {
+          method: 'GET',
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          const token = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
+          if (token) {
+            localStorage.setItem('csrfToken', token); // Zapisuje token CSRF w localStorage
+          }
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        console.error("Error fetching CSRF cookie:", error);
+      }
+    };
+
+    fetchCsrfToken();
+  }, []); // useEffect dependency array is empty, so it will run only once after component mounts
+
+  return (  
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools buttonPosition='bottom-left' />
       <ThemeProvider theme={theme}>

@@ -16,24 +16,34 @@ export default function RegisterPage({switchPage}: {switchPage: () => void}) {
   const [openModal, setOpenModal] = useState(false); // Stan dla otwierania/zamykania modala
 
   const handleRegister = async () => {
+
+  
+
+
+ 
     try {
-      // Wywołujemy odpowiedni endpoint do rejestracji
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+      // Wywołujemy odpowiedni endpoint do rejestracji  
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/register', {
         method: 'POST',
         credentials: "include",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'sessionid': document.cookie.split('; ').find(row => row.startsWith('X-CSRFToken='))?.split('=')[1] || '',
+          'X-CSRFToken': localStorage.getItem('csrfToken') || '',
       },  
         body: JSON.stringify({
           username,
           email,
           password,
+          re_password: secondPassword,
         }),
       });
-
+  
       if (response.ok) {
+        // Pobieramy token CSRF z nagłówka odpowiedzi
+        const csrfToken = response.headers.get('X-CSRFToken');
+        // Zapisujemy token CSRF w localStorage
+        localStorage.setItem('csrfToken', csrfToken as string);
         // Jeśli rejestracja zakończyła się sukcesem, otwieramy modal
         setOpenModal(true);
       } else {
@@ -45,6 +55,7 @@ export default function RegisterPage({switchPage}: {switchPage: () => void}) {
       setError('Błąd rejestracji');
     }
   };
+  
 
   const handleCloseModal = () => {
     // Po zamknięciu modala, przekierowujemy użytkownika na stronę logowania
