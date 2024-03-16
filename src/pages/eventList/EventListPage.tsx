@@ -17,13 +17,14 @@ import { EventDto } from "@/types/EventDto";
 import axios from "axios";
 import { dark } from "@mui/material/styles/createPalette";
 //import { formatDistanceToNow } from 'date-fns';
+import { format } from "date-fns";
 
 const fetchEvents = async () => {
   const { data } = await axios.get<EventDto[]>("/api/events/get_events");
   return data;
 };
 
-export default function BasicList() {
+const EventListPage: React.FC = () => {
   const {
     data: events,
     isLoading,
@@ -34,8 +35,12 @@ export default function BasicList() {
     queryFn: fetchEvents,
   });
 
-  if (!events) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -44,92 +49,67 @@ export default function BasicList() {
     >
       <nav aria-label="Events">
         <List>
-          <ListItem disablePadding sx={{ mb: 1 }}>
-            <ListItemButton
-              sx={{
-                height: "250px",
-                width: "100vw",
-                backgroundImage: `url('/night.jpg')`,
-                position: "relative",
-                borderRadius: "10px",
-                padding: 0,
-                border: "20px solid white",
-              }}
-            >
-              <Box
+          {events.map((event) => (
+            <ListItem disablePadding sx={{ mb: 1 }} key={event.name}>
+              <ListItemButton
                 sx={{
-                  position: "absolute",
-                  height: "35%",
-                  width: "100%",
-                  bottom: 0,
-                  backgroundColor: "white",
-                  color: "black",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  borderTop: "20px solid white",
-                  paddingLeft: 2,
-                  paddingRight: 2,
+                  height: "250px",
+                  width: "100vw",
+                  backgroundImage: `url('${event.photo}')`,
+                  position: "relative",
+                  borderRadius: "10px",
+                  padding: 0,
+                  border: "20px solid white",
                 }}
               >
-                <Box sx={{ alignItems: "flex-start" }}>
-                  <Typography variant="h5">Event Name</Typography>
-                  <Stack direction="row" spacing={2} alignItems="center">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 24, height: 24 }}
-                    />
-                    <Typography variant="body2">User Name</Typography>
-                  </Stack>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    height: "35%",
+                    width: "100%",
+                    bottom: 0,
+                    backgroundColor: "white",
+                    color: "black",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    borderTop: "20px solid white",
+                    paddingLeft: 2,
+                    paddingRight: 2,
+                  }}
+                >
+                  <Box sx={{ alignItems: "flex-start" }}>
+                    <Typography variant="h5">{event.name}</Typography>
+                    <Stack direction="row" spacing={2} alignItems="center">
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                        sx={{ width: 24, height: 24 }}
+                      />
+                      <Typography variant="body2">User Name</Typography>
+                    </Stack>
+                  </Box>
+                  <Box
+                    sx={{ position: "absolute", bottom: "5px", right: "2px" }}
+                  >
+                    <Typography variant="body2" align="right">
+                      {event.place}
+                    </Typography>
+                    <Typography variant="body2" align="right">
+                      date
+                    </Typography>
+                    <Typography variant="body2" align="right">
+                      {event.participantsCount} - {event.participantsMax} people
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box sx={{ position: "absolute", bottom: "5px", right: "2px" }}>
-                  <Typography variant="body2" align="right">
-                    Date: Day/Month/Year
-                  </Typography>
-                  <Typography variant="body2" align="right">
-                    5 - 10 people
-                  </Typography>
-                </Box>
-              </Box>
-              <ListItemText primary />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding sx={{ mb: 1 }}>
-            <ListItemButton
-              sx={{
-                height: "250px",
-                width: "100vw",
-                backgroundImage: `url('/night.jpg')`,
-                position: "relative",
-                borderRadius: "10px",
-                padding: 0,
-                border: "20px solid white",
-              }}
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  height: "25%",
-                  width: "100%",
-                  bottom: 0,
-                  backgroundColor: "white",
-                  color: "black",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderTop: "20px solid white",
-                }}
-              >
-                <Typography>Sample Text</Typography>
-              </Box>
-              <ListItemText primary />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </nav>
     </Box>
   );
-}
+};
+
+export default EventListPage;
