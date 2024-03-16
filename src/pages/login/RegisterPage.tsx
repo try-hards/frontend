@@ -1,3 +1,4 @@
+import logo from '@/assets/images/logo.png';
 import {
   Box,
   Button,
@@ -110,6 +111,12 @@ export default function RegisterPage({
   return (
     <Container maxWidth='xs'>
       <Box sx={{ marginTop: 8, textAlign: 'center' }}>
+        <Box
+          component={'img'}
+          src={logo}
+          alt='logo'
+          sx={{ height: 64, mb: 2, borderRadius: 2 }}
+        />
         <Typography variant='h4' gutterBottom>
           Sign Up
         </Typography>
