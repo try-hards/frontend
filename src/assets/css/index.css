@@ -5,6 +5,7 @@
   background-color: dodgerblue;
   position: relative;
   box-shadow: 0 0 10px dodgerblue;
+  z-index: 10;
 }
 
 .marker::after {

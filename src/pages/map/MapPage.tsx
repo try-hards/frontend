@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import tt from '@tomtom-international/web-sdk-maps';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import BottomDrawer from './BottomDrawer';
+import EventDetailsDrawer from './EventDetailsDrawer';
 
 const fetchEvents = async () => {
   const { data } = await axios.get<EventDto[]>('/api/events/get_events');
@@ -14,6 +14,7 @@ const fetchEvents = async () => {
 
 export default function MapPage() {
   const [map, setMap] = useState<tt.Map>();
+  const [event, setEvent] = useState<EventDto | null>(null);
 
   const {
     data: events,
@@ -65,6 +66,7 @@ export default function MapPage() {
         const marker = new tt.Marker()
           .setLngLat([e.longitude, e.latitude])
           .addTo(map);
+
         const popup = new tt.Popup({
           offset: 30,
           anchor: 'bottom',
@@ -74,7 +76,12 @@ export default function MapPage() {
             `<h3 style="margin: 0 0 8px 0">${e.name}</h3><img style="width: 80px; height: 80px; object-fit: cover" src="${e.photo}" alt="${e.name}"/>`,
           )
           .addTo(map);
+
         marker.setPopup(popup);
+
+        popup.getElement().addEventListener('click', function () {
+          setEvent(e);
+        });
       });
     }
   }, [map, events]);
@@ -92,7 +99,8 @@ export default function MapPage() {
           sx={{ width: '100%', height: '100%', bgcolor: 'black' }}
         />
       </Box>
-      <BottomDrawer />
+      {/* <EventListDrawer /> */}
+      <EventDetailsDrawer event={event} unsetEvent={() => setEvent(null)} />
     </Box>
   );
 }

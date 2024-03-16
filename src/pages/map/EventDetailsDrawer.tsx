@@ -1,18 +1,16 @@
+import { EventDto } from '@/types/EventDto';
 import { Global } from '@emotion/react';
 import Skeleton from '@mui/material/Skeleton';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Typography from '@mui/material/Typography';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import * as React from 'react';
 
 const drawerBleeding = 56;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+  event: EventDto | null;
+  unsetEvent: () => void;
   window?: () => Window;
 }
 
@@ -38,15 +36,15 @@ const Puller = styled('div')(({ theme }) => ({
   left: 'calc(50% - 15px)',
 }));
 
-export default function BottomDrawer(props: Props) {
-  const { window } = props;
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+export default function EventDetailsDrawer({
+  event,
+  unsetEvent,
+  window,
+}: Props) {
+  const closeDrawer = () => () => {
+    unsetEvent();
   };
 
-  // This is used only for the example
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -55,7 +53,7 @@ export default function BottomDrawer(props: Props) {
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(50% - ${drawerBleeding}px)`,
+            height: `calc(100% - ${drawerBleeding}px)`,
             overflow: 'visible',
           },
         }}
@@ -63,9 +61,9 @@ export default function BottomDrawer(props: Props) {
       <SwipeableDrawer
         container={container}
         anchor='bottom'
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        open={!!event}
+        onClose={closeDrawer}
+        onOpen={() => {}}
         swipeAreaWidth={drawerBleeding}
         disableSwipeToOpen={false}
         ModalProps={{
