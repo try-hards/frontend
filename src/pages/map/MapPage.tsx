@@ -19,9 +19,9 @@ export default function MapPage() {
 
   const {
     data: events,
-    isLoading,
-    isError,
-    error,
+    // isLoading,
+    // isError,
+    // error,
   } = useQuery({
     queryKey: ['events'],
     queryFn: fetchEvents,
@@ -102,18 +102,13 @@ export default function MapPage() {
   }, [map, events]);
 
   return (
-    <Box>
-      <Box
-        sx={{
-          width: '100%',
-          height: '90vh',
-        }}
-      >
-        <Box
-          id='map'
-          sx={{ width: '100%', height: '100%', bgcolor: 'black' }}
-        />
-      </Box>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <Box id='map' sx={{ width: '100%', height: '100%', bgcolor: 'black' }} />
       {events && <EventListDrawer events={events} />}
       <EventDetailsModal event={event} unsetEvent={() => setEvent(null)} />
     </Box>
