@@ -10,6 +10,7 @@ import { theme } from './config/theme';
 import AboutPage from './pages/about/AboutPage';
 import HomePage from './pages/home/HomePage';
 import NotFoundPage from './pages/notFound/NotFoundPage';
+import EventListPage from './pages/eventList/EventListPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <AboutPage />,
+      },
+      {
+        path: '/events',
+        element: <EventListPage />,
       },
       {
         path: '*',

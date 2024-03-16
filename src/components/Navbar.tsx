@@ -30,6 +30,9 @@ export default function Navbar() {
             <Button href='/about' color='inherit'>
               About
             </Button>
+            <Button href='/events' color='inherit'>
+              Events
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
