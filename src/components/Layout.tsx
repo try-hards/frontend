@@ -1,14 +1,13 @@
 import Unauthenticated from '@/pages/login/Unauthenticated';
+import { useUserStore } from '@/stores/useUserStore';
 import { Box } from '@mui/material';
 import React from 'react';
 import Navbar from './Navbar';
 
 export default function Layout({ children }: React.PropsWithChildren) {
-  // const isLoggedIn = useUserStore(
-  //   (state: { isLoggedIn: any }) => state.isLoggedIn,
-  // );
-
-  const isLoggedIn = true;
+  const isLoggedIn = useUserStore(
+    (state: { isLoggedIn: any }) => state.isLoggedIn,
+  );
 
   return (
     <Box
