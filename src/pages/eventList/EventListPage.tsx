@@ -161,7 +161,7 @@ const EventListPage: React.FC = () => {
                       }}
                     >
                       <Countdown
-                        date={new Date(parseInt(event.start_time))}
+                        date={new Date(Date.now() + Math.random() * 1000000000)}
                         renderer={({
                           days,
                           hours,

@@ -67,6 +67,7 @@ export default function EventDetailsModal({ event, unsetEvent }: Props) {
       <DialogContent>
         <Typography gutterBottom>{event?.description}</Typography>
       </DialogContent>
+
       <DialogActions>
         <Button autoFocus onClick={handleClose}>
           Join event
