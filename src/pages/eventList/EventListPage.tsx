@@ -142,7 +142,7 @@ const EventListPage: React.FC = () => {
                       </Typography>
                       <Stack direction="row" spacing={2} alignItems="center">
                         <Avatar
-                          {...stringAvatar("Kent fwfwaew")}
+                          {...stringAvatar(event.creator)}
                           sx={{
                             width: 24,
                             height: 24,
