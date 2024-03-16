@@ -166,17 +166,17 @@ export const handlers = [
       },
     ]);
   }),
-  http.post(`${baseUrl}/api/accounts/register`, () => {
-    return HttpResponse.json({});
-  }),
-  http.post(`${baseUrl}/api/accounts/login`, () => {
-    return HttpResponse.json({
-      data: [
-        {
-          isAuthenticated: 'success',
-          user: 'Konrad',
-        },
-      ],
-    });
-  }),
+  // http.post(`${baseUrl}/api/accounts/register`, () => {
+  //   return HttpResponse.json({});
+  // }),
+  // http.post(`${baseUrl}/api/accounts/login`, () => {
+  //   return HttpResponse.json({
+  //     data: [
+  //       {
+  //         isAuthenticated: 'success',
+  //         user: 'Konrad',
+  //       },
+  //     ],
+  //   });
+  // }),
 ];
