@@ -6,7 +6,6 @@ import tt from '@tomtom-international/web-sdk-maps';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import EventDetailsModal from './EventDetailsModal';
-import EventListDrawer from './EventListDrawer';
 
 const fetchEvents = async () => {
   const { data } = await axios.get<EventDto[]>('/api/events/get_events');
@@ -109,7 +108,7 @@ export default function MapPage() {
       }}
     >
       <Box id='map' sx={{ width: '100%', height: '100%', bgcolor: 'black' }} />
-      {events && <EventListDrawer events={events} />}
+      {/* {events && <EventListDrawer events={events} />} */}
       <EventDetailsModal event={event} unsetEvent={() => setEvent(null)} />
     </Box>
   );

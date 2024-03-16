@@ -10,7 +10,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -31,30 +30,70 @@ export default function RegisterPage({
   const [error, setError] = useState('');
   const [openModal, setOpenModal] = useState(false); // Stan dla otwierania/zamykania modala
 
+  // const handleRegister = async () => {
+  // try {
+  // const response = await axios.post(
+  //   '/api/accounts/register',
+  //   {
+  //     username,
+  //     email,
+  //     password,
+  //     re_password: secondPassword,
+  //   },
+  //   {
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //       'X-CSRF-Token': localStorage.getItem('csrfToken') || '',
+  //     },
+  //     withCredentials: true,
+  //   },
+  // );
+
+  //     if (response.status === 200) {
+  //       const csrfToken = response.headers['x-csrftoken'];
+  //       localStorage.setItem('csrfToken', csrfToken);
+  //       setOpenModal(true);
+  //     } else {
+  //       setError('Błąd rejestracji');
+  //     }
+  //   } catch (error) {
+  //     console.error('Błąd rejestracji:', error);
+  //     setError('Błąd rejestracji');
+  //   }
+  // };
+
   const handleRegister = async () => {
     try {
-      const response = await axios.post(
-        '/api/accounts/register',
+      // Wywołujemy odpowiedni endpoint do rejestracji
+      const response = await fetch(
+        'http://127.0.0.1:8000/api/accounts/register',
         {
-          username,
-          email,
-          password,
-          re_password: secondPassword,
-        },
-        {
+          method: 'POST',
+          credentials: 'include',
           headers: {
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRF-Token': localStorage.getItem('csrfToken') || '',
+            'X-CSRFToken': localStorage.getItem('csrfToken') || '',
           },
-          withCredentials: true,
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            re_password: secondPassword,
+          }),
         },
       );
 
-      if (response.status === 200) {
-        const csrfToken = response.headers['x-csrftoken'];
-        localStorage.setItem('csrfToken', csrfToken);
+      if (response.ok) {
+        // Pobieramy token CSRF z nagłówka odpowiedzi
+        const csrfToken = response.headers.get('X-CSRFToken');
+        // Zapisujemy token CSRF w localStorage
+        localStorage.setItem('csrfToken', csrfToken as string);
+        // Jeśli rejestracja zakończyła się sukcesem, otwieramy modal
         setOpenModal(true);
       } else {
+        // W przypadku błędu rejestracji, ustawiamy komunikat o błędzie
         setError('Błąd rejestracji');
       }
     } catch (error) {
