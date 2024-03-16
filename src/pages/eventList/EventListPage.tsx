@@ -17,7 +17,7 @@ import { EventDto } from "@/types/EventDto";
 import axios from "axios";
 import { dark } from "@mui/material/styles/createPalette";
 //import { formatDistanceToNow } from 'date-fns';
-import { format } from "date-fns";
+import { addHours, format } from "date-fns";
 import Countdown from "react-countdown";
 
 function stringToColor(string: string) {
@@ -180,11 +180,35 @@ const EventListPage: React.FC = () => {
                             );
                           } else {
                             // Render a countdown
-                            return (
-                              <Typography variant="body2">
-                                {days}d {hours}h {minutes}m until event starts
-                              </Typography>
-                            );
+                            if (days > 0) {
+                              if (hours > 0) {
+                                return (
+                                  <Typography variant="body2">
+                                    {hours}h {minutes}m until start
+                                  </Typography>
+                                );
+                              } else {
+                                return (
+                                  <Typography variant="body2">
+                                    {minutes}m until start
+                                  </Typography>
+                                );
+                              }
+                            } else {
+                              if (hours > 0) {
+                                return (
+                                  <Typography variant="body2">
+                                    {hours}h {minutes}m until start
+                                  </Typography>
+                                );
+                              } else {
+                                return (
+                                  <Typography variant="body2">
+                                    {minutes}m until start
+                                  </Typography>
+                                );
+                              }
+                            }
                           }
                         }}
                       />
