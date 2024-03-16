@@ -1,3 +1,4 @@
+import { EventDto } from '@/types/EventDto';
 import { Global } from '@emotion/react';
 import Skeleton from '@mui/material/Skeleton';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
@@ -9,11 +10,8 @@ import * as React from 'react';
 const drawerBleeding = 56;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
+  events: EventDto[];
 }
 
 const Root = styled('div')(({ theme }) => ({
@@ -38,8 +36,7 @@ const Puller = styled('div')(({ theme }) => ({
   left: 'calc(50% - 15px)',
 }));
 
-export default function EventListDrawer(props: Props) {
-  const { window } = props;
+export default function EventListDrawer({ events, window }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -85,7 +82,7 @@ export default function EventListDrawer(props: Props) {
         >
           <Puller />
           <Typography sx={{ p: 2, color: 'text.secondary' }}>
-            51 results
+            {events?.length} results
           </Typography>
         </StyledBox>
         <StyledBox

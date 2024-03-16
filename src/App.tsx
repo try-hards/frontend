@@ -44,7 +44,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools buttonPosition='bottom-left' />
+      <ReactQueryDevtools buttonPosition='bottom-right' />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <RouterProvider router={router} />

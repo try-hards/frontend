@@ -16,6 +16,10 @@ interface Props {
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiPaper-root': {
+    width: '100%',
+    height: '50%',
+  },
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
   },
@@ -36,7 +40,7 @@ export default function EventDetailsModal({ event, unsetEvent }: Props) {
       open={!!event}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id='customized-dialog-title'>
-        Modal title
+        {event?.name}
       </DialogTitle>
       <IconButton
         aria-label='close'
@@ -51,20 +55,7 @@ export default function EventDetailsModal({ event, unsetEvent }: Props) {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Typography gutterBottom>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </Typography>
-        <Typography gutterBottom>
-          Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-          Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-        </Typography>
-        <Typography gutterBottom>
-          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-          magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-          ullamcorper nulla non metus auctor fringilla.
-        </Typography>
+        <Typography gutterBottom>{event?.description}</Typography>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleClose}>

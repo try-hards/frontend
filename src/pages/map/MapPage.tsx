@@ -68,6 +68,10 @@ export default function MapPage() {
           .setLngLat([e.longitude, e.latitude])
           .addTo(map);
 
+        const fillPercent = Math.round(
+          (e.participantsCount / e.participantsMax) * 100,
+        );
+
         const popup = new tt.Popup({
           offset: 30,
           anchor: 'bottom',
