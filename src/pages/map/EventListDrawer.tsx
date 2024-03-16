@@ -55,7 +55,7 @@ export default function EventListDrawer(props: Props) {
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(50% - ${drawerBleeding}px)`,
+            height: `calc(75% - ${drawerBleeding}px)`,
             overflow: 'visible',
           },
         }}
