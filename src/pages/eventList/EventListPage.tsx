@@ -45,7 +45,12 @@ const EventListPage: React.FC = () => {
 
   return (
     <Box
-      sx={{ width: "100vw", maxWidth: "100vw", bgcolor: "background.paper" }}
+      sx={{
+        width: "100vw",
+        maxWidth: "100vw",
+        bgcolor: "background.paper",
+        outline: "10px black",
+      }}
     >
       <nav aria-label="Events">
         <List>
@@ -76,6 +81,7 @@ const EventListPage: React.FC = () => {
                     borderTop: "20px solid white",
                     paddingLeft: 2,
                     paddingRight: 2,
+                    outline: "10px soild grey",
                   }}
                 >
                   <Box sx={{ alignItems: "flex-start" }}>
@@ -104,6 +110,7 @@ const EventListPage: React.FC = () => {
                   </Box>
                 </Box>
               </ListItemButton>
+              <Divider />
             </ListItem>
           ))}
         </List>
