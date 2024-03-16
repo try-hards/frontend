@@ -5,9 +5,10 @@ import React from 'react';
 import Navbar from './Navbar';
 
 export default function Layout({ children }: React.PropsWithChildren) {
-  const isLoggedIn = useUserStore(
-    (state: { isLoggedIn: any }) => state.isLoggedIn,
-  );
+  const isLoggedIn = true;
+  //useUserStore(
+    //(state: { isLoggedIn: any }) => state.isLoggedIn,
+  //);
 
   return (
     <Box
@@ -27,7 +28,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
       >
         {isLoggedIn ? children : <Unauthenticated />}
       </Box>
-      {isLoggedIn && (
+      //{isLoggedIn && (
         <>
           <Navbar />
           <Box sx={{ height: 56 }} />
