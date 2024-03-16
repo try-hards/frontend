@@ -25,7 +25,7 @@ export default function LoginPage(){
       });
 
       if (response.ok) {
-        // Jeśli autoryzacja zakończyła się sukcesem, wywołaj funkcję przekazaną przez prop onLogin
+        // Jeśli autoryzxacja zakończyła się sukcesem, wywołaj funkcję przekazaną przez prop onLogin
         onLogin();
       } else {
         // W przypadku błędu autoryzacji, ustaw komunikat o błędzie
@@ -74,7 +74,7 @@ export default function LoginPage(){
       <Box sx={{ mt: 2, textAlign: 'center' }}>
         <Typography variant="body2">
           Dont have an account?{' '}
-          <Link href="/register" color="primary">
+          <Link href="/login" color="primary">
             Register
           </Link>
           .

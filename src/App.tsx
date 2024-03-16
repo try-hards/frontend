@@ -3,15 +3,15 @@ import { CssBaseline } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
-
 import Layout from './components/Layout';
 import { queryClient } from './config/query';
 import { theme } from './config/theme';
 import AboutPage from './pages/about/AboutPage';
 import HomePage from './pages/home/HomePage';
-import LoginPage from './pages/login/LoginScreen';
+import LoginPage from './pages/login/LoginPage';
 import NotFoundPage from './pages/notFound/NotFoundPage';
-import RegisterPage from './pages/registration/RegistrationScreen';
+import ProfilePage from './pages/profile/ProfilePage';
+import RegisterPage from './pages/registration/RegisterPage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <RegisterPage />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       },
       {
         path: '*',

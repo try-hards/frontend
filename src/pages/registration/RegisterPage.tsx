@@ -7,7 +7,7 @@ interface RegisterProps {
   onRegister: (username: string, email: string, password: string) => void;
 }
 
-export default function RegisterPage({ onRegister }: RegisterProps) {
+export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
