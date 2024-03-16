@@ -89,7 +89,7 @@ const EventListPage: React.FC = () => {
               <ListItem disablePadding sx={{ mb: 1 }}>
                 <ListItemButton
                   sx={{
-                    height: "260px",
+                    height: "300px",
                     width: "80vw",
                     backgroundImage: `url('${event.photo}')`,
                     position: "relative",
@@ -107,8 +107,7 @@ const EventListPage: React.FC = () => {
                       backgroundColor: "white",
                       color: "black",
                       display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
+
                       paddingLeft: 2,
                       paddingRight: 2,
                       borderBottomLeftRadius: "9px",
@@ -119,64 +118,80 @@ const EventListPage: React.FC = () => {
                   >
                     <Box
                       sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
                         width: "100%",
-                        height: "100%",
+                        height: "40%",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
                       }}
                     >
-                      <Box sx={{ width: "50%" }}>
-                        <Typography variant="h4">{event.name}</Typography>
-                        <Stack direction="row" spacing={2} alignItems="center">
-                          <Avatar
-                            {...stringAvatar("Kent Dodds")}
-                            sx={{
-                              width: 24,
-                              height: 24,
-                              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)",
-                            }}
-                          />
-                          <Typography variant="body2">
-                            {event.creator}
-                          </Typography>
-                        </Stack>
-                      </Box>
-                      <Box sx={{ width: "50%", textAlign: "right" }}>
-                        <Typography variant="body2">{event.place}</Typography>
-                        <Countdown
-                          date={new Date(parseInt(event.start_time))}
-                          renderer={({
-                            days,
-                            hours,
-                            minutes,
-                            seconds,
-                            completed,
-                          }) => {
-                            if (completed) {
-                              // Render a completed state
-                              return (
-                                <Typography variant="body2">
-                                  Event has ended
-                                </Typography>
-                              );
-                            } else {
-                              // Render a countdown
-                              return (
-                                <Typography variant="body2">
-                                  {days}d {hours}h {minutes}m {seconds}s until
-                                  event starts
-                                </Typography>
-                              );
-                            }
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {event.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ marginBottom: "10px", color: "#808080" }}
+                      >
+                        {event.place}
+                      </Typography>
+                      <Stack direction="row" spacing={2} alignItems="center">
+                        <Avatar
+                          {...stringAvatar("Kent fwfwaew")}
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)",
                           }}
                         />
-                        <Typography variant="body2">
-                          {event.participantsCount} / {event.participantsMax}{" "}
-                          people
-                        </Typography>
-                      </Box>
+                        <Typography variant="body2">{event.creator}</Typography>
+                      </Stack>
+                    </Box>
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        right: "20px",
+                        width: "50%",
+                        textAlign: "right",
+                        justifyContent: "flex-end",
+                        marginTop: "50px",
+                      }}
+                    >
+                      <Countdown
+                        date={new Date(parseInt(event.start_time))}
+                        renderer={({
+                          days,
+                          hours,
+                          minutes,
+                          seconds,
+                          completed,
+                        }) => {
+                          if (completed) {
+                            // Render a completed state
+                            return (
+                              <Typography variant="body2">
+                                Event has ended
+                              </Typography>
+                            );
+                          } else {
+                            // Render a countdown
+                            return (
+                              <Typography variant="body2">
+                                {days}d {hours}h {minutes}m until event starts
+                              </Typography>
+                            );
+                          }
+                        }}
+                      />
+                      <Typography variant="body2">
+                        {event.participantsCount} - {event.participantsMax}{" "}
+                        people
+                      </Typography>
                     </Box>
                   </Box>
                 </ListItemButton>
