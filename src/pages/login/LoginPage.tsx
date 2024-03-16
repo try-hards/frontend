@@ -4,28 +4,32 @@ import { TextField, Button, Container, Typography, Box, Link } from '@mui/materi
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface LoginProps {
-  onLogin: (username: string, password: string) => void;
+  onLogin: () => void; // Dodajemy onLogin jako funkcję bez parametrów
 }
 
-export default function LoginPage({switchPage}: {switchPage: () => void}){
+export default function LoginPage({ switchPage, onLogin }: { switchPage: () => void } & LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(API_URL + '/accounts/authenticated', {
-        method: 'GET',
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/login', {
+        method: 'POST',
         credentials: 'include',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          sessionid: document.cookie.split('; ').find((row) => row.startsWith('sessionid='))?.split('=')[1] || '',
+          'X-CSRFToken': localStorage.getItem('csrfToken') || ''
         },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
       });
 
       if (response.ok) {
-        // Jeśli autoryzxacja zakończyła się sukcesem, wywołaj funkcję przekazaną przez prop onLogin
+        // Jeśli autoryzacja zakończyła się sukcesem, wywołaj funkcję onLogin
         onLogin();
       } else {
         setError('Błąd logowania');
@@ -35,7 +39,6 @@ export default function LoginPage({switchPage}: {switchPage: () => void}){
       setError('Błąd logowania');
     }
   };
-
 
   return (
     <Container maxWidth="xs">
@@ -72,8 +75,8 @@ export default function LoginPage({switchPage}: {switchPage: () => void}){
       </Box>
       <Box sx={{ mt: 2, textAlign: 'center' }}>
         <Typography variant="body2">
-          Dont have an account?{' '}
-          <Link onClick={switchPage}  color="primary">
+          Don't have an account?{' '}
+          <Link onClick={switchPage} color="primary">
             Register
           </Link>
           .
@@ -82,4 +85,3 @@ export default function LoginPage({switchPage}: {switchPage: () => void}){
     </Container>
   );
 };
-
