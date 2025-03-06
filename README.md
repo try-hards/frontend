@@ -1,4 +1,6 @@
-![Evder Logo](download.png)
+<p align="center">
+  <img src="download.png" alt="Evder Logo" width="512">
+</p>
 
 Evder is an innovative React application developed during the Software Mansion Hackathon 2024. The challenge was to create a solution that enhances life in Kraków. Evder addresses the issue of event discovery, helping residents and visitors stay informed about activities happening around them.
 
