@@ -1,11 +1,20 @@
-# Frontend Base
+![Evder Logo](download.png)
 
-## Description
+Evder is an innovative React application developed during the Software Mansion Hackathon 2024. The challenge was to create a solution that enhances life in Kraków. Evder addresses the issue of event discovery, helping residents and visitors stay informed about activities happening around them.
 
-This is a base project for a frontend application. It includes a basic structure and some useful tools to start a new project.
+## Features
+- **User Accounts** – Register and manage your profile seamlessly.
+- **Event Creation** – Organize events with precise map localization.
+- **Event Participation** – Join events and connect with others.
+- **Interactive Map** – Powered by TomTom SDK for intuitive navigation.
 
-## Setup
+## Tech Stack
+- **Frontend**: React, Vite  
+- **Backend**: Django
+- **Maps**: TomTom SDK  
 
-1. Run `npm install` to install the dependencies.
-1. Copy and rename the `.env.template` file to `.env` and set the environment variables.
-1. Run `npm dev` to start the development server.
+Evder is designed to bridge the gap between event organizers and attendees, making it easier to engage with Kraków’s vibrant community.
+
+---
+
+![Evder Screenshot](image.png)
